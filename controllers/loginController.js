@@ -11,6 +11,7 @@ const {loginActivity} = require("../controllers/activityLogController");
 
 const postLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  console.log('Login request received:', req.body);
 
   let user;
   let userType = '';
