@@ -30,6 +30,7 @@ const sendEmailSuccess = async ({ email, plainPassword }) => {
         Password: ${plainPassword}
         
         Note: Please avoid refreshing the page during registration, as this may cause issues with your account setup.
+        The Evaluation Form is at the bottom of the Home Page.
 
         Link: https://egrade-frontend.onrender.com
 
@@ -49,6 +50,7 @@ const sendEmailSuccess = async ({ email, plainPassword }) => {
         <p>Email: <strong>${email}</strong></p>
         <p>Password: <strong>${plainPassword}</strong></p>
         <p>Note: Please avoid refreshing the page during registration, as this may cause issues with your account setup.</p>
+        <p>The Evaluation Form is at the bottom of the Home Page.</p>
         <p>Link: <strong>https://egrade-frontend.onrender.com</strong> </p>
         <p>For your security, please log in to your account and change your password as soon as possible.</p>
         <p>If you did not register for this account, please ignore this email or contact our support team immediately.</p>
