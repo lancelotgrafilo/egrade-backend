@@ -202,12 +202,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
       console.log("Student not found for ID:", id);
       return res.status(404).json({ message: 'Student not found' });
     }
-
-    await logActivity({ 
-      userID: id, 
-      activityDescription: `Deleted Student ${id.last_name}`
-    });
-
+    
     console.log("Student deleted successfully:", id);
     res.status(200).json({ message: 'Student deleted successfully' });
   } catch (error) {
