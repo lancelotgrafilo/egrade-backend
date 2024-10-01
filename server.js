@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS for frontend communication
 app.use(cors({
   origin: 'https://egrade-frontend.onrender.com', // Your frontend URL deployed on Render
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'], // Allowed methods
   credentials: true // Allow cookies or auth headers if needed
 }));
 
