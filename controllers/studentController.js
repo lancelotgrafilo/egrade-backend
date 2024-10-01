@@ -35,7 +35,7 @@ const studentRegistrationSchema = Joi.object({
   course: Joi.string().required(),
   year: Joi.string().required(),
   section: Joi.string().required(),
-  curriculum_effective_year: Joi.string().required(),
+  curriculum_effective_year: Joi.string(),
   isActive: Joi.boolean().default(true), 
   createdAt: Joi.date().default(Date.now), 
 });
