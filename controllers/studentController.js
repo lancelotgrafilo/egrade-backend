@@ -208,10 +208,10 @@ const deleteStudent = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    await axios.post('/api/logout-activity', { 
-      userID: id, 
-      activityDescription: `Deleted Student ${id.last_name}`
-    });
+    // await axios.post('/api/logout-activity', { 
+    //   userID: id, 
+    //   activityDescription: `Deleted Student ${id.last_name}`
+    // });
 
     console.log("Student deleted successfully:", id);
     res.status(200).json({ message: 'Student deleted successfully' });
