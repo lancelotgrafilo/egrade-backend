@@ -29,6 +29,8 @@ const sendEmailSuccess = async ({ email, plainPassword }) => {
         Email: ${email}
         Password: ${plainPassword}
 
+        Link: https://egrade-frontend.onrender.com
+
         For your security, please log in to your account and change your password as soon as possible.
 
         If you did not register for this account, please ignore this email or contact our support team immediately.
@@ -44,6 +46,7 @@ const sendEmailSuccess = async ({ email, plainPassword }) => {
         <p>Here are your login details:</p>
         <p>Email: <strong>${email}</strong></p>
         <p>Password: <strong>${plainPassword}</strong></p>
+        <p>Link: <strong>https://egrade-frontend.onrender.com</strong> </p>
         <p>For your security, please log in to your account and change your password as soon as possible.</p>
         <p>If you did not register for this account, please ignore this email or contact our support team immediately.</p>
         <p>Welcome aboard, and thank you for joining eGrade Navigator!</p>
