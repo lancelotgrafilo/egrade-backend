@@ -595,6 +595,26 @@ const addSubjectsToStudent = async (req, res) => {
       return res.status(400).json({ message: 'Subjects must be an array' });
     }
 
+    // Utility function to check for special grades
+    const isSpecialGrade = (grade) => grade === "INC" || grade === "ODRP";
+
+    // Utility function to calculate GWA and round down to 1 decimal place
+    const calculateGWA = (subjects) => {
+      const validGrades = subjects
+        .map(subject => subject.FINAL_GRADE)
+        .filter(grade => !isNaN(grade));  // Only include valid numerical grades
+
+      if (validGrades.length === 0) {
+        return "N/A"; // No valid grades
+      }
+
+      const totalGrades = validGrades.reduce((sum, grade) => sum + Number(grade), 0);
+      const averageGrade = totalGrades / validGrades.length;
+
+      // Round down to 1 decimal place without rounding up
+      return Math.floor(averageGrade * 10) / 10;
+    };
+
     // Loop through each subject
     for (const newSubject of subjects) {
       const { academic_year, semester, subject_code, midterm_grade, finalterm_grade, FINAL_GRADE } = newSubject;
@@ -619,9 +639,6 @@ const addSubjectsToStudent = async (req, res) => {
       const existingSubjectIndex = gradeEntry.subjects.findIndex(
         (existingSubject) => existingSubject.subject_code === subject_code
       );
-
-      // Determine if the grade is "INC" or "ODRP"
-      const isSpecialGrade = (grade) => grade === "INC" || grade === "ODRP";
 
       let finalGWA = null; // To store the GWA as either "INC", "ODRP", or a calculated number
 
@@ -648,19 +665,7 @@ const addSubjectsToStudent = async (req, res) => {
         finalGWA = finalterm_grade; // Set GWA to "INC" or "ODRP" based on final term grade
       } else {
         // Recalculate GWA for this grade entry after adding/updating a subject, if no "INC" or "ODRP"
-        const validGrades = gradeEntry.subjects
-          .map(subject => subject.FINAL_GRADE)  // Keep the original grade
-          .filter(grade => !isNaN(grade));  // Only include valid numerical grades
-
-        if (validGrades.length > 0) {
-          const totalGrades = validGrades.reduce((sum, grade) => sum + Number(grade), 0);
-          const averageGrade = totalGrades / validGrades.length;
-
-          // Update GWA with 1 decimal place
-          finalGWA = averageGrade.toFixed(1);
-        } else {
-          finalGWA = "N/A"; // No valid grades
-        }
+        finalGWA = calculateGWA(gradeEntry.subjects);
       }
 
       // Update the GWA for the grade entry
@@ -672,9 +677,10 @@ const addSubjectsToStudent = async (req, res) => {
     res.status(200).json(student);
   } catch (error) {
     console.error("Error adding subjects:", error);
-    res.status(500).json({ message: 'Error adding subjects', error });
+    res.status(500).json({ message: 'Error adding subjects', error: error.message });
   }
 };
+
 
 
 
