@@ -11,9 +11,6 @@ const { ObjectId } = mongoose.Types;
 
 const { sendEmailSuccess } = require('./emailSuccessController');
 
-
-const {logActivity} = require('../services/activityLogService');
-
 const generateRandomPassword = (length = 6) => {
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let password = '';
@@ -28,7 +25,7 @@ const studentRegistrationSchema = Joi.object({
   schoolID: Joi.string().required(),
   last_name: Joi.string().required(),
   first_name: Joi.string().required(),
-  middle_initial: Joi.string().required(),
+  middle_initial: Joi.string(),
   email: Joi.string().email().required(),
   password: Joi.string(),
   college: Joi.string().required(),

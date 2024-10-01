@@ -33,7 +33,7 @@ const gradeSchema = new mongoose.Schema({
 const studentSchema = new mongoose.Schema({
   last_name: { type: String, required: true },
   first_name: { type: String, required: true },
-  middle_initial: { type: String, required: true },
+  middle_initial: { type: String, default: null },
   schoolID: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String },
