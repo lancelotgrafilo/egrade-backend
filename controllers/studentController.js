@@ -261,7 +261,7 @@ const postStudentsFileUpload = asyncHandler(async (req, res) => {
       // Capitalize names before pushing to results
       const formattedLastName = last_name.charAt(0).toUpperCase() + last_name.slice(1).toLowerCase();
       const formattedFirstName = first_name.charAt(0).toUpperCase() + first_name.slice(1).toLowerCase();
-      const formattedMiddleInitial = middle_initial.charAt(0).toUpperCase(); // Only capitalize the first character
+      const formattedMiddleInitial = middle_initial ? middle_initial.charAt(0).toUpperCase() : null; // Set to null if no middle initial
 
       // Add simple validation (e.g., checking required fields)
       if (schoolID && formattedLastName && formattedFirstName && email) {
@@ -272,7 +272,7 @@ const postStudentsFileUpload = asyncHandler(async (req, res) => {
           schoolID,
           last_name: formattedLastName,
           first_name: formattedFirstName,
-          middle_initial: formattedMiddleInitial,
+          middle_initial: formattedMiddleInitial, // Use formatted middle initial (null if no data)
           course,
           email,
           college,
@@ -313,6 +313,7 @@ const postStudentsFileUpload = asyncHandler(async (req, res) => {
       res.status(500).json({ message: "Error reading CSV file", error });
     });
 });
+
 
 
 
