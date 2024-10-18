@@ -82,11 +82,6 @@ const postFacultyStaff = asyncHandler(async (req, res) => {
   try{
     await facultyStaff.save();
 
-    await logActivity({
-      userId: facultyID, // Assuming you have user info in the request
-      activity: `Added faculty staff: ${first_name} ${last_name} (ID: ${facultyID})`
-    });
-
     // Call sendEmailSuccess with the required information
     await sendEmailSuccess({
       email,
