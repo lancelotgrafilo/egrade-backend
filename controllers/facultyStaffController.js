@@ -312,11 +312,7 @@ const postInstructorsLoad = asyncHandler(async (req, res) => {
 
     // Save changes to the database
     await instructor.save();
-
-    await logActivity({
-      userId: instructor.first_name, // Assuming you have user info in the request
-      activity: `Added load for instructor: ${instructor.first_name} ${instructor.last_name} (ID: ${_id})`
-    });
+    
 
     res.status(200).json({
       message: "Successfully added new Instructor's Load"
@@ -445,11 +441,7 @@ const postInstructorsLoadFileUpload = asyncHandler(async (req, res) => {
 
         // Save changes
         await faculty.save();
-
-        await logActivity({
-          userId: instructorId, // Assuming you have user info in the request
-          activity: `Uploaded load data for Instructor ID: ${instructorId}, loaded ${results.length} subjects`
-        });
+        
 
         res.status(200).json({ message: "File uploaded and data saved successfully" });
       } catch (error) {
@@ -492,11 +484,6 @@ const addStudentToInstructorsStudents = async (req, res) => {
     if (!updatedInstructor) {
       return res.status(404).json({ message: "Instructor or Load not found" });
     }
-
-    await logActivity({
-      userId: facultyId, // Assuming you have user info in the request
-      activity: `Added student to Instructor's Load (Instructor ID: ${facultyId}, Load ID: ${loadId})`
-    });
 
 
     res.json(updatedInstructor);
