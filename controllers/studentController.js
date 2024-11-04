@@ -586,6 +586,11 @@ const addSubjectsToStudent = async (req, res) => {
     // Utility function to check for special grades
     const isSpecialGrade = (grade) => grade === "INC" || grade === "ODRP";
 
+    // Utility function to format a number to 1 decimal place without rounding up
+    const formatToOneDecimalPlace = (grade) => {
+      return Math.floor(grade * 10) / 10;
+    };
+
     // Utility function to calculate GWA and round down to 1 decimal place
     const calculateGWA = (subjects) => {
       const validGrades = subjects
@@ -600,12 +605,15 @@ const addSubjectsToStudent = async (req, res) => {
       const averageGrade = totalGrades / validGrades.length;
 
       // Round down to 1 decimal place without rounding up
-      return Math.floor(averageGrade * 10) / 10;
+      return formatToOneDecimalPlace(averageGrade);
     };
 
     // Loop through each subject
     for (const newSubject of subjects) {
       const { academic_year, semester, subject_code, midterm_grade, finalterm_grade, FINAL_GRADE } = newSubject;
+
+      // Format FINAL_GRADE to 1 decimal place if it's a number
+      const formattedFinalGrade = isSpecialGrade(FINAL_GRADE) ? FINAL_GRADE : formatToOneDecimalPlace(Number(FINAL_GRADE));
 
       // Check for existing grade entry for the academic year and semester
       let gradeEntry = student.grades.find(
@@ -635,14 +643,14 @@ const addSubjectsToStudent = async (req, res) => {
         const existingSubject = gradeEntry.subjects[existingSubjectIndex];
         existingSubject.midterm_grade = midterm_grade;
         existingSubject.finalterm_grade = finalterm_grade;
-        existingSubject.FINAL_GRADE = isSpecialGrade(FINAL_GRADE) ? FINAL_GRADE : Number(FINAL_GRADE); // Keep "INC" or "ODRP" as strings
+        existingSubject.FINAL_GRADE = formattedFinalGrade; // Set to formatted final grade
       } else {
         // If it doesn't exist, add it
         gradeEntry.subjects.push({
           subject_code,
           midterm_grade,
           finalterm_grade,
-          FINAL_GRADE: isSpecialGrade(FINAL_GRADE) ? FINAL_GRADE : Number(FINAL_GRADE), // Keep "INC" or "ODRP" as strings
+          FINAL_GRADE: formattedFinalGrade, // Set to formatted final grade
         });
       }
 
@@ -668,6 +676,7 @@ const addSubjectsToStudent = async (req, res) => {
     res.status(500).json({ message: 'Error adding subjects', error: error.message });
   }
 };
+
 
 
 

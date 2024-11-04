@@ -60,8 +60,6 @@ const postLogin = asyncHandler(async (req, res) => {
       responseID = user.ID;
     } else if (userType === 'faculty_staff') {
       responseID = user.facultyID;
-    } else if (userType === 'registrar_staff') {
-      responseID = user.ID;
     } else if (userType === 'student') {
       responseID = user.schoolID;
     }

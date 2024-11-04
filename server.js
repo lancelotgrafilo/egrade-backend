@@ -29,19 +29,19 @@ app.use(cors({
 connectDB(); // Call to connect to MongoDB
 
 // Routes for different parts of the application
-app.use('/api', require('./routes/studentRoute'));
-app.use('/api', require('./routes/subjectRoute'));
-app.use('/api', require('./routes/classProgramRoute'));
-app.use('/api', require('./routes/leaderboardRoute'));
-app.use('/api', require('./routes/loginRoute')); 
-app.use('/api', require('./routes/registerRoute'));
-app.use('/api', require('./routes/adminRoute'));
-app.use('/api', require('./routes/collegeStaffRoute'));
+app.use('/api', require('./routes/studentRoute')); // done
+app.use('/api', require('./routes/subjectRoute')); // 
+app.use('/api', require('./routes/classProgramRoute')); //
+app.use('/api', require('./routes/leaderboardRoute')); //
+app.use('/api', require('./routes/loginRoute')); //
+app.use('/api', require('./routes/registerRoute')); //
+app.use('/api', require('./routes/adminRoute')); //
+app.use('/api', require('./routes/collegeStaffRoute')); //
 app.use('/api/post_registrar_staff', require('./routes/registrarStaffRoute'));
-app.use('/api', require('./routes/facultyStaffRoute'));
-app.use('/api', require('./routes/emailRegRoute'));
+app.use('/api', require('./routes/facultyStaffRoute')); //
+app.use('/api', require('./routes/emailRegRoute')); //
 app.use("/api/post_send_email_success_msg", require('./routes/emailSuccessRoute'));
-app.use('/api', require('./routes/usersListRoute'));
+app.use('/api', require('./routes/usersListRoute')); //
 app.use('/api', require('./routes/dashboardRoute'));
 app.use('/api', require('./routes/removalCompleteRoute'));
 app.use('/api', require('./routes/fileRoutes'));
