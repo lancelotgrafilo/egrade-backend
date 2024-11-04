@@ -63,6 +63,11 @@ const processFile = (fileBuffer) => {
         continue;
       }
 
+      // Format FINAL_GRADE to 1 decimal place if it’s a number
+      if (!isNaN(FINAL_GRADE)) {
+        FINAL_GRADE = Math.floor(Number(FINAL_GRADE) * 10) / 10;
+      }
+
       course = course_year_section.split(' ')[0];
       const year_section = course_year_section.replace(course, '').trim();
       year = year_section.match(/\d+/) ? year_section.match(/\d+/)[0] : '';
