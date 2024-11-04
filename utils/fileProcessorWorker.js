@@ -57,7 +57,15 @@ const processFile = (fileBuffer) => {
       const course_year_section = row[5] || '';
       const midterm_grade = row[8] || '';
       const finalterm_grade = row[11] || '';
-      const FINAL_GRADE = row[14] || '';
+      // Attempt to read FINAL_GRADE and format it to 1 decimal place if it's a valid number
+      let FINAL_GRADE = (!isNaN(row[14]) && row[14] !== '') 
+      ? Math.floor(Number(row[14]) * 10) / 10 
+      : row[14] || ''; // If it's not a number, keep as is or default to an empty string
+
+
+      // Log the row to see its contents, especially for FINAL_GRADE
+      console.log(`Row ${rowIndex}:`, row);
+      console.log(`Extracted FINAL_GRADE:`, FINAL_GRADE);
 
       if (!last_name || last_name === 'FEMALE') {
         continue;
