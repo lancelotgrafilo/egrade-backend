@@ -700,12 +700,6 @@ const updateStudentGrades = asyncHandler(async (req, res) => {
 
         studentFound = true;
 
-        // Log the update activity
-        await logActivity({
-          userId: instructorId, 
-          activity: `Updated grades for Student (ID: ${studentId}) in Instructor's Load (Instructor ID: ${instructorId})`
-        });
-
         break;
       }
     }
