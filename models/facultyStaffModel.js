@@ -14,7 +14,6 @@ const generateRandomPassword = (length = 6) => {
 };
 
 // Define a schema for student information within a subject load
-// Define a schema for student information within a subject load
 const studentSchema = new mongoose.Schema({
   last_name: { type: String },
   first_name: { type: String },

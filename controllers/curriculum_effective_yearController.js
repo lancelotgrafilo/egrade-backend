@@ -34,9 +34,4 @@ const addCurriculumEffectiveYear = async (req, res) => {
   }
 };
 
-
-
-
-
-
 module.exports = { getCurriculumEffectiveYear, addCurriculumEffectiveYear };
