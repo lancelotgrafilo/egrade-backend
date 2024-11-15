@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const { sendEmailSuccess } = require('./emailSuccessController');
 
 // Function to generate a random password
-const generateRandomPassword = (length = 12) => {
+const generateRandomPassword = (length = 6) => {
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let password = '';
   for (let i = 0; i < length; i++) {
@@ -72,7 +72,7 @@ const postRegistrarStaff = asyncHandler(async (req, res) => {
     });
 
     res.status(201).json({ message: "Successfully Added New Registrar Staff" });
-    
+
   } catch (err) {
     console.error('Error saving registrar staff:', err);
     res.status(500).json({ message: "Failed to add registrar staff", error: err });
