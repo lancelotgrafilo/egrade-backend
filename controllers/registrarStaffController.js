@@ -48,6 +48,7 @@ const postRegistrarStaff = asyncHandler(async (req, res) => {
   }
   // Generate and hash the random password
   const generatedPassword = generateRandomPassword();
+  const plainPassword = generatedPassword;
   const hashedPassword = await bcrypt.hash(generatedPassword, 10); // 10 is the salt rounds
 
   const registrarStaff = new registrarStaffModel({
