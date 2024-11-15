@@ -5,7 +5,6 @@ const Joi = require('joi');
 const bcrypt = require('bcryptjs');
 
 const { sendEmailSuccess } = require('./emailSuccessController');
-const { getConfirmationCode } = require('../utils/confirmationStore');
 
 // Function to generate a random password
 const generateRandomPassword = (length = 12) => {
@@ -66,15 +65,9 @@ const postRegistrarStaff = asyncHandler(async (req, res) => {
   try {
     await registrarStaff.save();
 
-    // Retrieve the confirmation code
-    const confirmationCode = getConfirmationCode(email); // Ensure to pass the email to get the code
-    // console.log("adminController: confirmation Code: ", confirmationCode);
-
-    // Call sendEmailSuccess with the required information
     await sendEmailSuccess({
       email,
-      generatedPassword,
-      confirmationCode 
+      plainPassword
     });
 
     res.status(201).json({ message: "Successfully Added New Registrar Staff" });

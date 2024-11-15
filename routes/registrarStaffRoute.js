@@ -5,6 +5,6 @@ const {
   postRegistrarStaff
 } = require('../controllers/registrarStaffController');
 
-router.route('/').post(postRegistrarStaff);
+router.route('/post_registrar_staff').post(postRegistrarStaff);
 
 module.exports = router;

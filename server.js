@@ -37,7 +37,7 @@ app.use('/api', require('./routes/loginRoute')); //
 app.use('/api', require('./routes/registerRoute')); //
 app.use('/api', require('./routes/adminRoute')); //
 app.use('/api', require('./routes/collegeStaffRoute')); //
-app.use('/api/post_registrar_staff', require('./routes/registrarStaffRoute'));
+app.use('/api', require('./routes/registrarStaffRoute'));
 app.use('/api', require('./routes/facultyStaffRoute')); //
 app.use('/api', require('./routes/emailRegRoute')); //
 app.use("/api/post_send_email_success_msg", require('./routes/emailSuccessRoute'));
