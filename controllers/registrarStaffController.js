@@ -72,6 +72,7 @@ const postRegistrarStaff = asyncHandler(async (req, res) => {
     });
 
     res.status(201).json({ message: "Successfully Added New Registrar Staff" });
+    
   } catch (err) {
     console.error('Error saving registrar staff:', err);
     res.status(500).json({ message: "Failed to add registrar staff", error: err });

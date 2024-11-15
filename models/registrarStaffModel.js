@@ -27,6 +27,10 @@ const generateNextID = async () => {
 registrarStaffSchema.pre('save', async function (next) {
   if (this.isNew) {
     this.ID = await generateNextID();
+    // Capitalize the first letter of first_name, last_name, and middle_initial
+    this.first_name = this.first_name.charAt(0).toUpperCase() + this.first_name.slice(1).toLowerCase();
+    this.last_name = this.last_name.charAt(0).toUpperCase() + this.last_name.slice(1).toLowerCase();
+    this.middle_initial = this.middle_initial.charAt(0).toUpperCase(); // Capitalize the first character
   }
   next();
 });
