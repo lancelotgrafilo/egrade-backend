@@ -107,7 +107,31 @@ const getRegistrarDetails = asyncHandler(async (req, res) => {
   }
 });
 
+const updateUserStatus = async (req, res) => {
+  const { userId } = req.params;
+  const { isActive } = req.body; // Expecting { isActive: false }
+
+  try {
+    // Find user by ID and update the isActive field
+    const updatedUser = await registrarStaffModel.findByIdAndUpdate(
+      userId,
+      { isActive },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User status updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user status:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 module.exports = {
   postRegistrarStaff,
-  getRegistrarDetails
+  getRegistrarDetails,
+  updateUserStatus
 };
