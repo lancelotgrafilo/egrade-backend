@@ -56,6 +56,8 @@ const postLogin = asyncHandler(async (req, res) => {
 
     if (userType === 'admin') {
       responseID = user.ID;
+    } else if (userType === 'registrar_staff') {
+      responseID = user.ID;
     } else if (userType === 'college_staff') {
       responseID = user.ID;
     } else if (userType === 'faculty_staff') {
