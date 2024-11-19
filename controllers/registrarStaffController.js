@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const registrarStaffModel = require('../models/registrarStaffModel');
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
 const { sendEmailSuccess } = require('./emailSuccessController');
 
